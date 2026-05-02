@@ -2,7 +2,8 @@ name: Build APK
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
   build:
@@ -18,7 +19,7 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: '17'
 
       - name: Install Android SDK
@@ -28,22 +29,4 @@ jobs:
         run: yes | sdkmanager --licenses
 
       - name: Build APK
-        working-directory: BTHidController
-        run: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: BTHidController/app/build/outputs/apk/debug/*.apk        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: BTHidController/app/build/outputs/apk/debug/*.apk        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: BTHidController/app/build/outputs/apk/debug/*.apk        uses: actions/upload-artifact@v4
-        with:
-          name: app-debug
-          path: BTHidController/app/build/outputs/apk/debug/*.apk
+        working-directory: B
