@@ -29,12 +29,13 @@ jobs:
         run: yes | sdkmanager --licenses
 
       - name: Build APK
-        working-directory: BTHidController
         run: |
+          cd $(find . -type f -name "gradlew" | head -n 1 | xargs dirname)
           chmod +x gradlew
           ./gradlew assembleDebug
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: BTHidController/app/build/outputs/apk/debug/*.apk
+          path: '**/build/outputs/apk/debug/*.apk'
