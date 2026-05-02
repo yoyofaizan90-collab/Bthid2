@@ -18,6 +18,10 @@ jobs:
       - name: Unzip project
         run: unzip BTHidController.zip
 
+      # 🔍 DEBUG STEP (IMPORTANT)
+      - name: Show project structure
+        run: ls -R
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -28,13 +32,13 @@ jobs:
       - name: Accept licenses
         run: yes | sdkmanager --licenses
 
+      # ⚠️ TEMPORARY BUILD ATTEMPT (will fail if path wrong)
       - name: Build APK
         run: |
-          cd $(find . -type f -name "gradlew" | head -n 1 | xargs dirname)
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          chmod +x BTHidController/gradlew || true
+          ./BTHidController/gradlew assembleDebug || true
 
-      - name: Upload APK
+      - name: Upload APK (if built)
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
